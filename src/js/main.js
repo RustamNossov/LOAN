@@ -1,6 +1,7 @@
 import Slider from './modules/slider';
 import ShowVideo from './modules/showVideo';
 import SliderAtPage from './modules/sliderAtPage';
+import Accordion from './modules/accordion';
 
 window.addEventListener('DOMContentLoaded', () => {
 
@@ -10,12 +11,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const show = new ShowVideo();
     show.play();
 
-    const sliderFirstPage = new SliderAtPage({
-        'sliderContainerSelector': '.showup__content-slider', 
-        'nextBtnSelector': '.showup__next', 
-        'prevBtnSelector': '.showup__prev'
-     });
-    sliderFirstPage.initiation();
+    
 
 
     if ( document.URL === "http://localhost:4000/" ) {
@@ -23,9 +19,25 @@ window.addEventListener('DOMContentLoaded', () => {
             'sliderWrapper': '.page', 
             'prevSlideBtn': null, 
             'nextSlideBtn': '.sidecontrol .next', 
-            'firstSlide' : 1
+            'firstSlide' : 2
         })
         slider.launch();
+
+
+        const sliderFirstPage = new SliderAtPage({
+            'sliderContainerSelector': '.showup__content-slider', 
+            'nextBtnSelector': '.showup__next', 
+            'prevBtnSelector': '.showup__prev'
+         });
+        sliderFirstPage.initiation();
+
+
+
+        const officeroldAccordion = new Accordion('.officerold', '.plus');
+        const officernewAccordion = new Accordion('.officernew', '.plus');
+        officeroldAccordion.showItem();
+        officernewAccordion.showItem();
+
 
 
        
@@ -43,7 +55,7 @@ window.addEventListener('DOMContentLoaded', () => {
             'sliderWrapper': '.moduleapp', 
             'prevSlideBtn': '.prev', 
             'nextSlideBtn': '.next',
-            'firstSlide' : 1
+            'firstSlide' : 2
         })
         sliderModule.launch();
 

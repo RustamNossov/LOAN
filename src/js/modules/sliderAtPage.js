@@ -17,7 +17,6 @@ export default class SliderAtPage {
         this.container.style.display = 'flex';
         this.container.style.overflow = 'hidden';
         this.slides.forEach( (slide, i) => {
-            console.log('shrink')
             slide.style.flexShrink = 0;
             slide.style.order = i;
         })    
@@ -41,7 +40,6 @@ export default class SliderAtPage {
                        
             this.currentSlide > this.slidesAmount-1 ? this.currentSlide = 0 : this.currentSlide;
             
-            // console.log(this.currentSlide)
             this.moveSlideLeft(this.offset)
             
 
@@ -82,7 +80,6 @@ export default class SliderAtPage {
             this.offset = 331;
                        
             this.currentSlide < 0 ? this.currentSlide = this.slidesAmount-1 : this.currentSlide;
-            // console.log(this.currentSlide);
            
 
             this.slides.forEach(slide => {
@@ -122,7 +119,6 @@ export default class SliderAtPage {
 
 
     switchOpacity() {
-        console.log(this.currentSlide);
         this.slides.forEach(slide => {
             slide.querySelector('.card__title').style.opacity = '0.4';
             slide.querySelector('.card__controls-count').style.opacity = '.4';

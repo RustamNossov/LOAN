@@ -4,14 +4,17 @@ export default class Slider {
         this.sliderWrapper = document.querySelector(sliderWrapper);
         this.prevSlideBtn = document.querySelectorAll(prevSlideBtn);
         this.nextSlideBtn = document.querySelectorAll(nextSlideBtn);
-        this.slides = this.sliderWrapper.children;
+        this.slides = document.querySelectorAll(`${sliderWrapper} > div`);;
         this.currentSlideNumber = firstSlide-1 || 0;
         this.homeBtns = document.querySelectorAll('.sidecontrol');
     }
 
     
     render(exeptSlideNumber) {
+
         this.slides.forEach((element, i) => {
+           element.style.display = 'none'
+            
             if (i != exeptSlideNumber) {
                 element.style.display = 'none';
                 element.classList.add('animated', 'fadeOut');
