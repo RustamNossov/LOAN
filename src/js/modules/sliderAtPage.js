@@ -1,12 +1,13 @@
 export default class SliderAtPage {
-    constructor({sliderContainerSelector, nextBtnSelector, prevBtnSelector}) {
+    constructor({sliderContainerSelector, nextBtnSelector, prevBtnSelector, activeClass, cardSelector}) {
         this.container = document.querySelector(sliderContainerSelector);
-        this.slides = this.container.querySelectorAll('a');
+        this.slides = this.container.querySelectorAll(cardSelector);
         this.slidesAmount = this.slides.length;
         this.next = document.querySelector(nextBtnSelector);
         this.prev = document.querySelector(prevBtnSelector);
         this.currentSlide = 0;
         this.offset = 0;
+        this.activeClass = activeClass;
 
     }
 
@@ -23,7 +24,8 @@ export default class SliderAtPage {
 
         this.clickNext();
         this.clickPrev();
-        this.switchOpacity()
+        this.removeActivClass();
+        this.addActivClass();
     }
 
     moveSlideLeft(offset) {
@@ -35,13 +37,16 @@ export default class SliderAtPage {
 
     clickNext() {
         this.next.addEventListener( 'click', ()=>{
+            this.removeActivClass();
+            this.offset = -(+window.getComputedStyle(this.slides[this.currentSlide])['marginRight'].slice(0,-2) +
+            +window.getComputedStyle( this.slides[this.currentSlide])['marginLeft'].slice(0,-2) +
+            +window.getComputedStyle( this.slides[this.currentSlide])['width'].slice(0,-2)); 
             this.currentSlide += 1;
-            this.offset = -331;
-                       
+
             this.currentSlide > this.slidesAmount-1 ? this.currentSlide = 0 : this.currentSlide;
             
             this.moveSlideLeft(this.offset)
-            
+            this.addActivClass()
 
             let x = 0;
             
@@ -69,16 +74,18 @@ export default class SliderAtPage {
             this.slides.forEach(slide => {
                 slide.style.transition = '.5s all';
              })
-            this.switchOpacity();
         })
         
     }
 
     clickPrev() {
         this.prev.addEventListener( 'click', ()=>{
+            this.removeActivClass();
+            this.offset = (+window.getComputedStyle(this.slides[this.currentSlide])['marginRight'].slice(0,-2) +
+            +window.getComputedStyle( this.slides[this.currentSlide])['marginLeft'].slice(0,-2) +
+            +window.getComputedStyle( this.slides[this.currentSlide])['width'].slice(0,-2));
             this.currentSlide -= 1;
-            this.offset = 331;
-                       
+
             this.currentSlide < 0 ? this.currentSlide = this.slidesAmount-1 : this.currentSlide;
            
 
@@ -88,9 +95,9 @@ export default class SliderAtPage {
                     slide.style.order = -1;
                 } 
             });
-
+            
             this.moveSlideLeft(-this.offset);
-
+            this.addActivClass();
             
             let x = 0;
             for (let i=this.currentSlide; i<=this.slidesAmount-1; i++) {
@@ -111,24 +118,22 @@ export default class SliderAtPage {
                     this.moveSlideLeft(this.offset);
                 }, 100);
             
-                this.switchOpacity();
+                
             });
 
         
     }
 
 
-    switchOpacity() {
+    removeActivClass() {
+        console.log(this.slides);
         this.slides.forEach(slide => {
-            slide.querySelector('.card__title').style.opacity = '0.4';
-            slide.querySelector('.card__controls-count').style.opacity = '.4';
-            slide.querySelector('.card__controls-arrow').style.opacity = '0';
-        })
-        this.slides[this.currentSlide].querySelector('.card__title').style.opacity = '1';
-        this.slides[this.currentSlide].querySelector('.card__controls-count').style.opacity = '1';
-        this.slides[this.currentSlide].querySelector('.card__controls-arrow').style.opacity = '1';
+                slide.classList.remove(this.activeClass)
+            })
+    }
 
-
+    addActivClass() {
+        this.slides[this.currentSlide].classList.add(this.activeClass);
     }
 
 

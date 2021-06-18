@@ -1,4 +1,8 @@
 
+
+
+//import ShowModule from '../delayModuleShow';
+
 export default class Slider {
     constructor({sliderWrapper, prevSlideBtn, nextSlideBtn, firstSlide}) {
         this.sliderWrapper = document.querySelector(sliderWrapper);
@@ -26,6 +30,14 @@ export default class Slider {
                 element.classList.add('animated', 'fadeIn');
             }
         });
+
+        if (exeptSlideNumber === 2) {
+            this.showModule('.hanson', 3000);
+        
+        }
+
+
+
     }
 
     increaseSlideNumber() {
@@ -80,5 +92,18 @@ export default class Slider {
                 this.render(this.currentSlideNumber);
             })
         })
+    }
+
+    showModule(moduleSelector, delayMS) {
+            const module = document.querySelector(moduleSelector); 
+                  
+    
+        
+            module.style.display = 'none'
+    
+            setTimeout(()=>{
+                module.classList.add('animated', 'fadeIn');
+                module.style.display = 'block';
+            }, delayMS);
     }
 }
