@@ -4,13 +4,14 @@
 //import ShowModule from '../delayModuleShow';
 
 export default class Slider {
-    constructor({sliderWrapper, prevSlideBtn, nextSlideBtn, firstSlide}) {
+    constructor({sliderWrapper, prevSlideBtn, nextSlideBtn, firstSlide, page}) {
         this.sliderWrapper = document.querySelector(sliderWrapper);
         this.prevSlideBtn = document.querySelectorAll(prevSlideBtn);
         this.nextSlideBtn = document.querySelectorAll(nextSlideBtn);
         this.slides = document.querySelectorAll(`${sliderWrapper} > div`);;
         this.currentSlideNumber = firstSlide-1 || 0;
         this.homeBtns = document.querySelectorAll('.sidecontrol');
+        this.page = page;
     }
 
     
@@ -31,7 +32,7 @@ export default class Slider {
             }
         });
 
-        if (exeptSlideNumber === 2) {
+        if (exeptSlideNumber === 2 && this.page === 'home') {
             this.showModule('.hanson', 3000);
         
         }

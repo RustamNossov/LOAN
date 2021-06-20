@@ -19,7 +19,8 @@ window.addEventListener('DOMContentLoaded', () => {
             'sliderWrapper': '.page', 
             'prevSlideBtn': null, 
             'nextSlideBtn': '.sidecontrol .next', 
-            'firstSlide' : 5
+            'firstSlide' : 5,
+            'page': 'home'
         })
         slider.launch();
 
@@ -71,7 +72,8 @@ window.addEventListener('DOMContentLoaded', () => {
             'sliderWrapper': '.moduleapp', 
             'prevSlideBtn': '.prev', 
             'nextSlideBtn': '.next',
-            'firstSlide' : 2
+            'firstSlide' : 1,
+            'page': 'modules'
         })
         sliderModule.launch();
 
