@@ -2,6 +2,8 @@ import Slider from './modules/slider';
 import ShowVideo from './modules/showVideo';
 import SliderAtPage from './modules/sliderAtPage';
 import Accordion from './modules/accordion';
+import showMore from './modules/showMore';
+import forms from './modules/forms';
 
 window.addEventListener('DOMContentLoaded', () => {
 
@@ -14,12 +16,12 @@ window.addEventListener('DOMContentLoaded', () => {
     
 
 //home Page
-    if ( document.URL === "http://localhost:4000/" ) {
+    if ( document.URL === "http://192.168.64.5/LOAN/" ) {
         const slider = new Slider({
             'sliderWrapper': '.page', 
             'prevSlideBtn': null, 
             'nextSlideBtn': '.sidecontrol .next', 
-            'firstSlide' : 5,
+            'firstSlide' : 4,
             'page': 'home'
         })
         slider.launch();
@@ -40,7 +42,8 @@ window.addEventListener('DOMContentLoaded', () => {
             'nextBtnSelector': '.slick-next', 
             'prevBtnSelector': '.slick-prev',
             'activeClass' : 'card-active',
-            'cardSelector': '.card'
+            'cardSelector': '.card',
+            'autoChange': 'yes'
          });
          sliderThirdPage.initiation();
 
@@ -59,6 +62,10 @@ window.addEventListener('DOMContentLoaded', () => {
         const officernewAccordion = new Accordion('.officernew', '.plus');
         officeroldAccordion.showItem();
         officernewAccordion.showItem();
+
+
+        forms('.join .form');
+        forms('.schedule .form');
 
         
     }
@@ -79,6 +86,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
     }
 
+    const showingUp = new showMore('.module__info-show .plus__content');
+    showingUp.show();
 
 //----------------------
 });

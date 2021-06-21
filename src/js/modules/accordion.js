@@ -21,7 +21,6 @@ export default class Accordion {
     showItem() {
         this.cardsHidde();
         this.showMoreBtn.forEach(btn => {
-            console.log(btn);
             btn.addEventListener('click', ()=>{
                 let trigger;
                 this.switchOffTrigger += 1;                

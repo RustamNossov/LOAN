@@ -1,5 +1,5 @@
 export default class SliderAtPage {
-    constructor({sliderContainerSelector, nextBtnSelector, prevBtnSelector, activeClass, cardSelector}) {
+    constructor({sliderContainerSelector, nextBtnSelector, prevBtnSelector, activeClass, cardSelector, autoChange}) {
         this.container = document.querySelector(sliderContainerSelector);
         this.slides = this.container.querySelectorAll(cardSelector);
         this.slidesAmount = this.slides.length;
@@ -8,6 +8,7 @@ export default class SliderAtPage {
         this.currentSlide = 0;
         this.offset = 0;
         this.activeClass = activeClass;
+        this.autoChange = autoChange;
 
     }
 
@@ -26,6 +27,12 @@ export default class SliderAtPage {
         this.clickPrev();
         this.removeActivClass();
         this.addActivClass();
+
+        if (this.autoChange === 'yes') {
+            setInterval(()=>{
+                this.next.click();
+            }, 5000);
+        };
     }
 
     moveSlideLeft(offset) {
@@ -126,7 +133,6 @@ export default class SliderAtPage {
 
 
     removeActivClass() {
-        console.log(this.slides);
         this.slides.forEach(slide => {
                 slide.classList.remove(this.activeClass)
             })
